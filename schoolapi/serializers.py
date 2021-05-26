@@ -24,6 +24,7 @@ class TeacherSerializerMain(serializers.Serializer):
         user.email = validated_data["email"]
         user.username = user.email
         user.is_staff = True
+
         user.save()
 
         # user.set_password(validated_data["password"])
@@ -82,9 +83,10 @@ class PrincipalSerializerMain(serializers.Serializer):
         user.last_name = validated_data["last_name"]
         user.email = validated_data["email"]
         user.username = user.email
+
         user.save()
 
-        # user.set_password(validated_data["password"])
+
         # user.save()
 
         principal = Principal()

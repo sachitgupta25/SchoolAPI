@@ -1,7 +1,9 @@
 
 from .serializers import StudentDetails, StudentSerializerMain
 from rest_framework import viewsets
-from .models import Student,Teacher,Principal,User
+from .models import Student,Teacher,Principal
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticatedOrReadOnly,IsAuthenticated
 from rest_framework.response import Response
 from .serializers import TeacherSerializerMain, TeacherDetails,PrincipalDetails,\
     PrincipalSerializerMain
@@ -10,6 +12,8 @@ from .serializers import TeacherSerializerMain, TeacherDetails,PrincipalDetails,
 class Teacher_List_view(viewsets.ModelViewSet):
     queryset = Teacher.objects.all()
     serializer_class = TeacherDetails
+    # authentication_classes = [TokenAuthentication]
+    # permission_classes = [IsAuthenticatedOrReadOnly]
 
     def create(self, request, *args, **kwargs):
         data = request.data
@@ -43,6 +47,8 @@ class Teacher_List_view(viewsets.ModelViewSet):
 class Student_List_view(viewsets.ModelViewSet):
     queryset = Student.objects.all()
     serializer_class = StudentDetails
+    # authentication_classes = [TokenAuthentication]
+    # permission_classes = [IsAuthenticated]
 
     def create(self, request, *args, **kwargs):
         data = request.data
@@ -77,6 +83,8 @@ class Student_List_view(viewsets.ModelViewSet):
 class Principal_List_view(viewsets.ModelViewSet):
     queryset = Principal.objects.all()
     serializer_class = PrincipalDetails
+    # authentication_classes = [TokenAuthentication]
+    # permission_classes = [IsAuthenticated]
 
     def create(self, request, *args, **kwargs):
         data = request.data

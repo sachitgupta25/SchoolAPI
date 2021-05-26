@@ -1,9 +1,10 @@
 from uuid import uuid4
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser
+from django.conf import settings
+from django.contrib.auth.models import AbstractUser
 
 
-class User(AbstractBaseUser):
+class User(AbstractUser):
     first_name = models.CharField(max_length=15)
     last_name = models.CharField(max_length=15)
     email = models.EmailField(verbose_name= 'email',max_length= 60,unique= True)
@@ -23,13 +24,13 @@ class User(AbstractBaseUser):
 
 
 class Student(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     roll_no = models.PositiveIntegerField(unique='True')
     city = models.CharField(max_length=20)
 
 
 class Teacher(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     guid = models.CharField(max_length=40, default=uuid4().hex)
     qualification = models.CharField(max_length=15, blank=True, null=True)
     primary_subject = models.CharField(max_length=20, blank=True, null=True)
@@ -41,4 +42,4 @@ class Teacher(models.Model):
 
 
 class Principal(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
