@@ -26,8 +26,8 @@ class TeacherSerializerMain(serializers.Serializer):
         user.is_staff = True
 
         user.save()
-
         # user.set_password(validated_data["password"])
+
         # user.save()
 
         teacher = Teacher()
