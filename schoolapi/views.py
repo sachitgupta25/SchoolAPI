@@ -9,6 +9,7 @@ from .serializers import TeacherSerializerMain, TeacherDetails,PrincipalDetails,
     PrincipalSerializerMain
 
 
+
 class Teacher_List_view(viewsets.ModelViewSet):
     queryset = Teacher.objects.all()
     serializer_class = TeacherDetails
