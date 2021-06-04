@@ -11,7 +11,7 @@ class TeacherSerializerMain(serializers.Serializer):
     first_name = serializers.CharField(max_length=20)
     last_name = serializers.CharField(max_length=20)
     email = serializers.EmailField()
-    # password = serializers.CharField(max_length=20)
+    password = serializers.CharField(max_length=20)
     qualification = serializers.CharField(max_length=20)
     primary_subject = serializers.CharField(max_length=20)
     secondary_subject = serializers.CharField(max_length=20)
@@ -24,12 +24,8 @@ class TeacherSerializerMain(serializers.Serializer):
         user.email = validated_data["email"]
         user.username = user.email
         user.is_staff = True
-
+        user.set_password(validated_data["password"])
         user.save()
-        # user.set_password(validated_data["password"])
-
-        # user.save()
-
         teacher = Teacher()
         teacher.user = user
         teacher.qualification = validated_data["qualification"]
@@ -45,7 +41,7 @@ class StudentSerializerMain(serializers.Serializer):
     first_name = serializers.CharField(max_length=20)
     last_name = serializers.CharField(max_length=20)
     email = serializers.EmailField()
-    # password = serializers.CharField(max_length=20)
+    password = serializers.CharField(max_length=20)
     city = serializers.CharField(max_length=20)
     roll_no = serializers.IntegerField(min_value=0)
 
@@ -56,10 +52,8 @@ class StudentSerializerMain(serializers.Serializer):
         user.last_name = validated_data["last_name"]
         user.email = validated_data["email"]
         user.username = user.email
+        user.set_password(validated_data["password"])
         user.save()
-
-        # user.set_password(validated_data["password"])
-        # user.save()
 
         student = Student()
         student.user = user
@@ -74,7 +68,7 @@ class PrincipalSerializerMain(serializers.Serializer):
     first_name = serializers.CharField(max_length=20)
     last_name = serializers.CharField(max_length=20)
     email = serializers.EmailField()
-    # password = serializers.CharField(max_length=20)
+    password = serializers.CharField(max_length=20)
 
     def save(self, validated_data):
         user = User()
@@ -83,11 +77,11 @@ class PrincipalSerializerMain(serializers.Serializer):
         user.last_name = validated_data["last_name"]
         user.email = validated_data["email"]
         user.username = user.email
-
+        user.set_password(validated_data["password"])
         user.save()
 
 
-        # user.save()
+
 
         principal = Principal()
         principal.user = user
